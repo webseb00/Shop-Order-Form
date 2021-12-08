@@ -4,17 +4,16 @@ import Delivery from './components/Delivery/Delivery';
 import Payment from './components/Payment/Payment';
 import Summary from './components/Summary/Summary';
 
+import { Layout } from './components/Layout/Layout';
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        Hello react!
-        <Form />
-        <Delivery />
-        <Payment />
-        <Summary />
-      </header>
-    </div>
+    <Layout>
+      <Form />
+      <Delivery />
+      <Payment />
+      <Summary />
+    </Layout>
   );
 }
 
