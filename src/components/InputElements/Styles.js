@@ -14,7 +14,9 @@ export const Checkbox = styled.input`
   height: 2rem;
 `; 
 
-export const InputWrapper = styled.div``;
+export const InputWrapper = styled.div`
+  margin-bottom: 10px;
+`;
 
 export const Input = styled.input`
   font-family: 'Open Sans';
@@ -24,7 +26,7 @@ export const Input = styled.input`
   border-radius: 5px;
   padding: 1.4rem;
   border: 1px solid #cecece;
-  margin-bottom: 10px;
+  margin-bottom: -2px;
   outline: none;
 
   &:focus,
@@ -47,3 +49,9 @@ export const Select = styled.select`
 
 export const Option = styled.option``;
 
+export const ErrorField = styled.span`
+  font-size: 1.2rem;
+  color: #e54444;
+  margin-left: 5px;
+  font-weight: 500;
+`;

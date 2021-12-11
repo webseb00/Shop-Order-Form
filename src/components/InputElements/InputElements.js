@@ -1,4 +1,4 @@
-import { Label, Checkbox, InputWrapper, Input, Select, Option } from './Styles';
+import { Label, Checkbox, InputWrapper, Input, Select, Option, ErrorField } from './Styles';
 
 export const CheckboxItem = ({ label, title, value, handler }) => {
   return (
@@ -6,7 +6,7 @@ export const CheckboxItem = ({ label, title, value, handler }) => {
       <Checkbox 
         type="checkbox"
         name={title}
-        value={value}
+        value={value} 
         onChange={handler}
       />
       {label}
@@ -14,7 +14,8 @@ export const CheckboxItem = ({ label, title, value, handler }) => {
   )
 } 
 
-export const InputField = ({ type, label, placeholder, required }) => {
+export const InputField = ({ type, label, placeholder, required, refs, inputError }) => {
+  console.log(inputError);
   return (
     <InputWrapper>
       <Input 
@@ -22,7 +23,9 @@ export const InputField = ({ type, label, placeholder, required }) => {
         name={label}
         placeholder={placeholder}
         required={required}
+        {...refs}
       />
+      {inputError && <ErrorField>{inputError.message || "To pole jest wymagane."}</ErrorField>}
     </InputWrapper>
   )
 }
@@ -30,7 +33,7 @@ export const InputField = ({ type, label, placeholder, required }) => {
 export const SelectInput = ({ label, countries }) => {
   return (
     <Select name={label}>
-      {Array.from(countries).map((country, index) => <Option key={index} for={country.toLowerCase()}>{country}</Option>)};
+      {Array.from(countries).map((country, index) => <Option key={index} htmlFor={country.toLowerCase()}>{country}</Option>)};
     </Select>
   )
 }

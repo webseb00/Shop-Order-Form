@@ -19,7 +19,7 @@ export const InfoText = styled.span`
 export const InputGroup = styled.div`
   display: flex;
 
-  &:first-child {
+  & :first-child {
     margin-right: 1rem;
   }
 `;
