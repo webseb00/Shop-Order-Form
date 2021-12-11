@@ -14,6 +14,8 @@ export const Checkbox = styled.input`
   height: 2rem;
 `; 
 
+export const Radio = styled.input``;
+
 export const InputWrapper = styled.div`
   margin-bottom: 10px;
 `;
@@ -54,4 +56,15 @@ export const ErrorField = styled.span`
   color: #e54444;
   margin-left: 5px;
   font-weight: 500;
+`;
+
+export const Transition = styled.div`
+  opacity: 0;
+  visibility: hidden;
+  transition: all .4s ease-in;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
 `;

@@ -10,8 +10,11 @@ export const Container = styled.div`
 export const Row = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: "form delivery summary"
-                       ". payment .";
+  grid-template-areas: "form methods summary";
   margin: 0 auto;
   grid-gap: 20px;
+`;
+
+export const Content = styled.div`
+  grid-area: methods;
 `;

@@ -6,13 +6,13 @@ import { Button } from '../Button/Button';
 // component individual styles
 import { Wrapper, InfoPart, InfoText, InputGroup } from './Styles.js';
 // import form elements
-import { CheckboxItem, InputField, SelectInput } from '../InputElements/InputElements';
+import { CheckboxItem, InputField, SelectInput, InputTransition } from '../InputElements/InputElements';
 // react hook form library
 import { useForm } from "react-hook-form";
 
 function Form() {
   // show extra fields if user checks new account checkbox
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
   const handleChecked = () => setChecked(!checked);
   
   // handle form
@@ -33,8 +33,8 @@ function Form() {
         <CheckboxItem 
           name="new_account"
           label="Stwórz nowe konto"
-          checked={checked}
-          onChange={handleChecked}
+          value={checked}
+          handler={handleChecked}
         />
       </InfoPart>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -46,18 +46,22 @@ function Form() {
           refs={register("email_address", { required: true, pattern: /^[\w\.]+\@[\w]+\.[\w]+$/ })}
           inputError={errors.email_address}
         />
-        <InputField 
-          type="password"
-          label="password"
-          placeholder="Hasło"
-          required={false}
-        />
-        <InputField 
-          type="password"
-          label="password_confirm"
-          placeholder="Potwierdź hasło"
-          required={false}
-        />
+        {checked &&
+          <>
+            <InputField 
+              type="password"
+              label="password"
+              placeholder="Hasło"
+              required={false}
+            />
+            <InputField 
+              type="password"
+              label="password_confirm"
+              placeholder="Potwierdź hasło"
+              required={false}
+            />
+          </>
+          }
         <InputField 
           type="text"
           label="first_name"
@@ -112,7 +116,8 @@ function Form() {
           refs={register("phone", { required: true, pattern: /(\d{9})|(\d{3}\s\d{3}\s\d{3})/ })}
           inputError={errors.phone}
         />
-        <input type="submit" value="Submit" />
+        {/* input submit for testing form only */}
+        {/* <input type="submit" value="Submit" /> */}
       </form>
       <InfoPart>
         <CheckboxItem 

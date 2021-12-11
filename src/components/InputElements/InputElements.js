@@ -1,4 +1,4 @@
-import { Label, Checkbox, InputWrapper, Input, Select, Option, ErrorField } from './Styles';
+import { Label, Checkbox, Radio, InputWrapper, Input, Select, Option, ErrorField, Transition } from './Styles';
 
 export const CheckboxItem = ({ label, title, value, handler }) => {
   return (
@@ -6,7 +6,7 @@ export const CheckboxItem = ({ label, title, value, handler }) => {
       <Checkbox 
         type="checkbox"
         name={title}
-        value={value} 
+        checked={value} 
         onChange={handler}
       />
       {label}
@@ -14,8 +14,20 @@ export const CheckboxItem = ({ label, title, value, handler }) => {
   )
 } 
 
+export const RadioItem = ({ label, title, value }) => {
+  return (
+    <Label>
+      <Radio 
+        type="radio"
+        name={title}
+        value={value}
+      />
+      {label}
+    </Label>
+  )
+}
+
 export const InputField = ({ type, label, placeholder, required, refs, inputError }) => {
-  console.log(inputError);
   return (
     <InputWrapper>
       <Input 
@@ -35,5 +47,13 @@ export const SelectInput = ({ label, countries }) => {
     <Select name={label}>
       {Array.from(countries).map((country, index) => <Option key={index} htmlFor={country.toLowerCase()}>{country}</Option>)};
     </Select>
+  )
+}
+
+export const InputTransition = ({ children }) => {
+  return (
+    <Transition>
+      {children}
+    </Transition>
   )
 }

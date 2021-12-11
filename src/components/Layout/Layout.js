@@ -1,4 +1,4 @@
-import { Container, Row } from './LayoutStyles.js';
+import { Container, Row, Content } from './LayoutStyles.js';
 
 export const Layout = ({ children }) => {
   return (
@@ -10,3 +10,10 @@ export const Layout = ({ children }) => {
   )
 }
 
+export const OrderMethods = ({ children }) => {
+  return (
+    <Content>
+      {children}
+    </Content>
+  )
+}

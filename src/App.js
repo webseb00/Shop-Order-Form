@@ -4,14 +4,16 @@ import Delivery from './components/Delivery/Delivery';
 import Payment from './components/Payment/Payment';
 import Summary from './components/Summary/Summary';
 
-import { Layout } from './components/Layout/Layout';
+import { Layout, OrderMethods } from './components/Layout/Layout';
 
 function App() {
   return (
     <Layout>
       <Form />
-      <Delivery />
-      <Payment />
+      <OrderMethods>
+        <Delivery />
+        <Payment />
+      </OrderMethods>
       <Summary />
     </Layout>
   );

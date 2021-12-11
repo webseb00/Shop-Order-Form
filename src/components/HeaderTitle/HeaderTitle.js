@@ -11,7 +11,7 @@ export const HeaderTitle = ({ icon, title }) => {
 };
 
 HeaderTitle.propTypes = {
-  icon: PropTypes.string,
+  icon: PropTypes.object,
   title: PropTypes.string
 };
 
