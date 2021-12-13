@@ -10,7 +10,7 @@ export const Header = styled.div`
 
 export const StyledIcon = styled.span`
   color: #ffffff;
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin-right: 1rem;
 
   & > svg {
@@ -24,5 +24,5 @@ export const Title = styled.h5`
   text-transform: uppercase;
   color: #ffffff;
   font-weight: 400;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
 `;

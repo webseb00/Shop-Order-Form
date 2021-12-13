@@ -1,9 +1,13 @@
-import { Container } from './Styles';
+import { Wrapper } from './Styles';
 
-export const Button = ({ title }) => {
+export const Button = ({ title, mode, fontSize }) => {
   return (
-    <Container>
+    <Wrapper
+      type="button"
+      mode={mode}
+      fontSize={fontSize}
+    >
       {title}
-    </Container>
+    </Wrapper>
   )
 }

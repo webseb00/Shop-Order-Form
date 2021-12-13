@@ -14,13 +14,14 @@ export const CheckboxItem = ({ label, title, value, handler }) => {
   )
 } 
 
-export const RadioItem = ({ label, title, value }) => {
+export const RadioItem = ({ label, title, value, handler }) => {
   return (
     <Label>
       <Radio 
         type="radio"
         name={title}
         value={value}
+        onChange={handler}
       />
       {label}
     </Label>

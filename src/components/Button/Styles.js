@@ -1,20 +1,50 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.button`
+export const Wrapper = styled.button`
   width: 100%;
   padding: 1.5rem;
-  background: #e54444;
   border-radius: .5rem;
-  border: 2px solid #e54444;
-  color: #ffffff;
-  font-size: 1.8rem;
+  font-size: ${props => props.fontSize || `1.8rem`};
   font-weight: 500;
   letter-spacing: .3px;
   transition: all .4s ease-in;
   cursor: pointer;
 
-  &:hover {
-    background: transparent;
-    color: #e54444;
-  }
+  ${(props) => {
+    switch (props.mode) {
+      case "primary-outlined":
+        return css`
+          background: transparent;
+          border: 2px solid #e54444;
+          color: #e54444;
+
+          &:hover {
+            background: #e54444;
+            color: #ffffff;
+          }
+        `;
+      case "secondary-outlined":
+        return css`
+          background: transparent;
+          border: 2px solid #a89f8f;
+          color: #a89f8f;
+
+          &:hover {
+            background: #a89f8f;
+            color: #ffffff;
+          }
+        `;
+      default:
+        return css`
+          background: #e54444;
+          border: 2px solid #e54444;
+          color: #ffffff;
+
+          &:hover {
+            background: transparent;
+            color: #e54444;
+          }
+        `;
+    }
+  }}
 `;
