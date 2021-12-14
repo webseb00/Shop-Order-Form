@@ -1,4 +1,4 @@
-import { Label, Checkbox, Radio, InputWrapper, Input, Select, Option, ErrorField, Transition } from './Styles';
+import { Label, Checkbox, Radio, InputWrapper, Input, Textarea, Select, Option, ErrorField, Transition } from './Styles';
 
 export const CheckboxItem = ({ label, title, value, handler }) => {
   return (
@@ -40,6 +40,15 @@ export const InputField = ({ type, label, placeholder, required, refs, inputErro
       />
       {inputError && <ErrorField>{inputError.message || "To pole jest wymagane."}</ErrorField>}
     </InputWrapper>
+  )
+}
+
+export const TextareaInput = ({ name, placeholder }) => {
+  return (
+    <Textarea 
+      name={name}
+      placeholder={placeholder}
+    />
   )
 }
 

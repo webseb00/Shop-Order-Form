@@ -28,7 +28,10 @@ function Form() {
         title="1. Twoje dane"
       />
       <InfoPart>
-        <Button title="Logowanie" />
+        <Button 
+          title="Logowanie" 
+          mode="primary-outlined"
+          />
         <InfoText>Masz już konto? Kliknij żeby się zalogować</InfoText>
         <CheckboxItem 
           name="new_account"

@@ -39,6 +39,27 @@ export const Input = styled.input`
   }
 `;
 
+export const Textarea = styled.textarea`
+  font-family: 'Open Sans';
+  font-weight: 500;
+  font-size: 1.5rem;
+  width: 100%;
+  border-radius: 5px;
+  padding: 1.4rem;
+  border: 1px solid #cecece;
+  margin-bottom: -2px;
+  outline: none;
+  resize: none;
+  height: 100px;
+
+  &:focus,
+  &:focus-visible,
+  &:active {
+    border: 1px solid #cecece;
+    background: #e5eefe;
+  }
+`;
+
 export const Select = styled.select`
     margin-bottom: 10px;
     width: 100%;

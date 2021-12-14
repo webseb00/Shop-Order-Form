@@ -7,6 +7,10 @@ import { Button } from '../Button/Button';
 
 function Payment({ handlePayment, delivery }) {
 
+  const handleButton = () => {
+    console.log('discount');
+  }
+
   const handleRadio = e => handlePayment(e.target.value);
 
   const renderBoxesConditionally = () => {
@@ -75,6 +79,7 @@ function Payment({ handlePayment, delivery }) {
         mode="secondary-outlined"
         title="Dodaj kod rabatowy"
         fontSize={"1.6rem"}
+        handler={handleButton}
       />
     </Wrapper>
   )
