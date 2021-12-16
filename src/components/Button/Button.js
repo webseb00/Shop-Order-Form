@@ -1,9 +1,9 @@
 import { Wrapper } from './Styles';
 
-export const Button = ({ title, mode, fontSize, handler }) => {
+export const Button = ({ type="button", title, mode, fontSize, handler }) => {
   return (
     <Wrapper
-      type="button"
+      type={type}
       mode={mode}
       fontSize={fontSize}
       onClick={handler}

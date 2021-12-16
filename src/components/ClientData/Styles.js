@@ -9,6 +9,8 @@ export const InfoPart = styled.div`
   margin: 1rem 0;
 `;
 
+export const FormPart = styled.div``;
+
 export const InfoText = styled.span`
   display: inline-block;
   font-size: 1.34rem;

@@ -4,20 +4,14 @@ import { HeaderTitle } from '../HeaderTitle/HeaderTitle';
 import { BsPersonFill } from "react-icons/bs";
 import { Button } from '../Button/Button';
 // component individual styles
-import { Wrapper, InfoPart, InfoText, InputGroup } from './Styles.js';
+import { Wrapper, InfoPart, FormPart, InfoText, InputGroup } from './Styles.js';
 // import form elements
 import { CheckboxItem, InputField, SelectInput, InputTransition } from '../InputElements/InputElements';
-// react hook form library
-import { useForm } from "react-hook-form";
 
-function Form() {
+function ClientData({ form, register, errors }) {
   // show extra fields if user checks new account checkbox
   const [checked, setChecked] = useState(true);
   const handleChecked = () => setChecked(!checked);
-  
-  // handle form
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
 
   const countries = ['Polska', 'Francja', 'Niemcy', 'Anglia'];
 
@@ -40,7 +34,7 @@ function Form() {
           handler={handleChecked}
         />
       </InfoPart>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <FormPart>
         <InputField 
           type="email"
           label="email_address"
@@ -116,12 +110,10 @@ function Form() {
           label="phone"
           placeholder="Telefon *"
           required={true}
-          refs={register("phone", { required: true, pattern: /(\d{9})|(\d{3}\s\d{3}\s\d{3})/ })}
+          refs={register("phone", { required: true, maxLength: { value: 9, message: "Pole może zawierać maksymalnie 9 cyfr" }, pattern: /(\d{9})|(\d{3}\s\d{3}\s\d{3})/ })}
           inputError={errors.phone}
         />
-        {/* input submit for testing form only */}
-        {/* <input type="submit" value="Submit" /> */}
-      </form>
+      </FormPart>
       <InfoPart>
         <CheckboxItem 
           label="Dostawa pod inny adres"
@@ -131,4 +123,4 @@ function Form() {
   )
 }
 
-export default Form;
+export default ClientData;

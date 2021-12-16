@@ -4,7 +4,13 @@ import { Wrapper, OrderPart, OrderTop, Thumbnail, Product, OrderBottom, CTAPart 
 import { TextareaInput, CheckboxItem } from '../InputElements/InputElements';
 import { Button } from '../Button/Button';
 
-function Summary() {
+function Summary({ validate }) {
+
+  // const handleSubmit = () => {
+  //   validate();
+  //   console.log('submit order');
+  // }
+
   return (
     <Wrapper>
       <HeaderTitle 
@@ -45,6 +51,7 @@ function Summary() {
           label="Zapoznałem/am się z Regulaminem zakupów"
         />
         <Button 
+          type="submit"
           title="Potwierdź zamówienie"
           fontSize="1.55rem"
         />

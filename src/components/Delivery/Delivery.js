@@ -6,7 +6,11 @@ import { RadioItem } from '../InputElements/InputElements';
 
 function Delivery({ handleDelivery }) {
 
-  const handleRadio = e => handleDelivery(e.target.value);
+  const handleRadio = e => {
+    const arr = e.target.value.split('|');
+
+    handleDelivery(arr[0], arr[1]);
+  };
 
   return (
     <Wrapper>
@@ -17,8 +21,8 @@ function Delivery({ handleDelivery }) {
       <BoxWrapper>
         <Box>
           <RadioItem 
-            title="delivery_method"
-            value="paczkomat"
+            name="delivery_method"
+            value="Paczkomat | 10.99"
             label={
               <span><img src="../../img/inpost-logo.png" alt="paczkomat inpost" />Paczkomat 24/7</span>
             }
@@ -28,8 +32,8 @@ function Delivery({ handleDelivery }) {
         </Box>
         <Box>
           <RadioItem 
-            title="delivery_method"
-            value="kurier dpd"
+            name="delivery_method"
+            value="DPD | 18"
             label={
               <span><img src="../../img/dpd-logo.png" alt="dpd kurier" />Kurier DPD</span>
             }
@@ -39,8 +43,8 @@ function Delivery({ handleDelivery }) {
         </Box>
         <Box>
           <RadioItem 
-            title="delivery_method"
-            value="kurier dpd - pobranie"
+            name="delivery_method"
+            value="DPD - pobranie | 22"
             label={
               <span><img src="../../img/dpd-logo.png" alt="dpd pobranie" />Kurier DPD - pobranie</span>
             }
