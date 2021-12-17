@@ -3,8 +3,9 @@ import { BsTruckFlatbed } from "react-icons/bs";
 import { Wrapper, BoxWrapper, Box, Price } from './Styles';
 // import radio button
 import { RadioItem } from '../InputElements/InputElements';
+import { Message } from '../Message/Message';
 
-function Delivery({ handleDelivery }) {
+function Delivery({ handleDelivery, error }) {
 
   const handleRadio = e => {
     const arr = e.target.value.split('|');
@@ -53,6 +54,7 @@ function Delivery({ handleDelivery }) {
           <Price>22.00 zł</Price>
         </Box>
       </BoxWrapper>
+      {error && <Message type="danger" text="Proszę wybrać sposób dostawy!" />}
     </Wrapper>
   )
 }

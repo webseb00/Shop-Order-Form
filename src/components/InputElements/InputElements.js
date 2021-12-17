@@ -1,11 +1,11 @@
 import { Label, Checkbox, Radio, InputWrapper, Input, Textarea, Select, Option, ErrorField, Transition } from './Styles';
 
-export const CheckboxItem = ({ label, title, value, handler }) => {
+export const CheckboxItem = ({ label, name, value, handler }) => {
   return (
     <Label>
       <Checkbox 
         type="checkbox"
-        name={title}
+        name={name}
         checked={value} 
         onChange={handler}
       />

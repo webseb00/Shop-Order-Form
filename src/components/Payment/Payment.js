@@ -4,8 +4,9 @@ import { BsCreditCard } from "react-icons/bs";
 // import radio button
 import { RadioItem } from '../InputElements/InputElements';
 import { Button } from '../Button/Button';
+import { Message } from '../Message/Message';
 
-function Payment({ handlePayment, delivery }) {
+function Payment({ handlePayment, delivery, error }) {
 
   const handleButton = () => {
     console.log('discount');
@@ -19,7 +20,7 @@ function Payment({ handlePayment, delivery }) {
         <>
         <Box>
           <RadioItem 
-            title="payment_method"
+            name="payment_method"
             value="payu"
             label={
               <span><img src="../../img/payu-logo.png" alt="payU" />PayU</span>
@@ -29,7 +30,7 @@ function Payment({ handlePayment, delivery }) {
         </Box>
         <Box>
           <RadioItem 
-            title="payment_method"
+            name="payment_method"
             value="pobranie"
             label={
               <span><img src="../../img/wallet-2.png" alt="pobranie" />Płatność przy odbiorze</span>
@@ -39,7 +40,7 @@ function Payment({ handlePayment, delivery }) {
         </Box>
         <Box>
           <RadioItem 
-            title="payment_method"
+            name="payment_method"
             value="przelew"
             label={
               <span><img src="../../img/druk.png" alt="payU" />Przelew bankowy - zwykły</span>
@@ -73,6 +74,7 @@ function Payment({ handlePayment, delivery }) {
       />
       <BoxWrapper>
         {renderBoxesConditionally()}
+        {error && <Message type="danger" text="Proszę wybrać metodę płatności!" />}
       </BoxWrapper>
       {/* discount code button */}
       <Button

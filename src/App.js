@@ -23,15 +23,40 @@ function App() {
     }
   });
 
-  const onSubmit = data => handleState({ ...state, form: data });
+  // set errors for payment and delivery methods
+  const [errors, setErrors] = useState({
+    deliveryErr: null,
+    paymentErr: null
+  });
+
+  const onSubmit = (data, e) => {
+    // prevent submit form when payment and delivery methods are not checked
+    if(!state.delivery.method) {
+      setErrors({ ...errors, deliveryErr: true });
+      e.preventDefault();
+    } else if(!state.payment) {
+      setErrors({ ...errors, paymentErr: true });
+      e.preventDefault();
+    } 
+    
+    handleState({ ...state, form: data });
+  };
 
   const setDelivery = (method, price) => {
     handleState({ ...state, delivery: { method, price }});
+    // when user select delivery method, remove message error
+    setErrors({ ...errors, deliveryErr: null });
   };
-  const setPayment = payment => handleState({ ...state, payment });
+
+  const setPayment = payment => {
+    handleState({ ...state, payment });
+    // when user select payment method, remove message error
+    setErrors({ ...errors, paymentErr: null });
+  }
 
   const formValidation = () => {
     console.log('submit form');
+    
   }
 
   return (
@@ -45,10 +70,12 @@ function App() {
         <OrderMethods>
           <Delivery 
             handleDelivery={setDelivery} 
+            error={errors.deliveryErr}
           />
           <Payment 
             handlePayment={setPayment} 
             delivery={state.delivery} 
+            error={errors.paymentErr}
           />
         </OrderMethods>
         <Summary validate={formValidation} />
