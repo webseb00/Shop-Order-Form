@@ -15,7 +15,7 @@ function Payment({ handlePayment, delivery, error }) {
   const handleRadio = e => handlePayment(e.target.value);
 
   const renderBoxesConditionally = () => {
-    if(delivery !== "kurier dpd - pobranie") {
+    if(delivery !== "DPD - pobranie") {
       return (
         <>
         <Box>

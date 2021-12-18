@@ -3,14 +3,24 @@ import { BsClipboardData } from "react-icons/bs";
 import { Wrapper, OrderPart, OrderTop, Thumbnail, Product, OrderBottom, CTAPart } from './Styles';
 import { TextareaInput, CheckboxItem } from '../InputElements/InputElements';
 import { Button } from '../Button/Button';
+import { Message } from '../Message/Message';
 
-function Summary({ validate }) {
+function Summary({ deliveryPrice, productPrice, setQuantity, productQuantity, orderAccept, setOrderAccepted, orderAcceptError, submitStatus }) {
+  
+  const showDeliveryPrice = () => {
+    return (
+      <div className="price_top">
+        <p>Koszta wysyłki</p>
+        <p>{numberToString(deliveryPrice)} zł</p>
+      </div>
+    )
+  }
 
-  // const handleSubmit = () => {
-  //   validate();
-  //   console.log('submit order');
-  // }
-
+  const handleQuantity = e => setQuantity(Number(e.target.value));
+  const numberToString = number => number.toFixed(2); 
+  const handleOrderAccept = () => setOrderAccepted();
+  const finalPrice = deliveryPrice ? (deliveryPrice + productPrice * productQuantity) : productPrice;
+  
   return (
     <Wrapper>
       <HeaderTitle 
@@ -25,17 +35,28 @@ function Summary({ validate }) {
               <p className="product_name">Produkt Testowy</p>
               <p className="product_price">115,00 zł</p>
             </div>
-            <p className="product_quantity">Ilość: 1</p>
+            <p className="product_quantity">Ilość: 
+              <input 
+                className="product_input"
+                type="number" 
+                min="1" 
+                max="10" 
+                name="product_quantity"
+                value={productQuantity} 
+                onChange={handleQuantity}
+              />
+            </p>
           </Product>
         </OrderTop>
         <OrderBottom>
           <div className="price_top">
             <p>Suma częściowa</p>
-            <p>115,00 zł</p>
+            <p>{numberToString(productQuantity * productPrice)} zł</p>
           </div>
+          {deliveryPrice && showDeliveryPrice()}
           <div className="price_bottom">
             <p>Łącznie</p>
-            <p>115,00 zł</p>
+            <p>{numberToString(finalPrice)} zł</p>
           </div>
         </OrderBottom>
       </OrderPart>
@@ -49,11 +70,15 @@ function Summary({ validate }) {
         />
         <CheckboxItem 
           label="Zapoznałem/am się z Regulaminem zakupów"
+          checked={orderAccept}
+          handler={handleOrderAccept}
         />
+        {orderAcceptError && <Message type="danger" text="Proszę zaakceptować regulamin zakupów!" />}
         <Button 
           type="submit"
-          title="Potwierdź zamówienie"
+          title={!submitStatus ? "Potwierdź zamówienie" : "Zamówienie wysłane!"}
           fontSize="1.55rem"
+          disabled={!submitStatus ? false : true}
         />
       </CTAPart>
     </Wrapper>

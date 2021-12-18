@@ -9,39 +9,40 @@ import { Layout, OrderMethods } from './components/Layout/Layout';
 import { useForm } from "react-hook-form";
 
 function App() {
-
+  // react hook form
   const { register, handleSubmit, formState } = useForm();
-  
+  // main app state
   const [state, handleState] = useState({
     delivery: {
       method: null,
       price: null
     },
+    product: {
+      price: 115,
+      name: "Produkt testowy",
+      quantity: 1
+    },
     payment: null,
-    form: {
-      
-    }
+    form: null,
+    orderAccept: false,
+    submitFormStatus: false
   });
 
+  
   // set errors for payment and delivery methods
   const [errors, setErrors] = useState({
     deliveryErr: null,
-    paymentErr: null
+    paymentErr: null,
+    orderAcceptErr: null
   });
+  
+  const handleMethodError = (obj, e) => {
+    setErrors({ ...errors, ...obj });
+    e.preventDefault();
+  }
 
-  const onSubmit = (data, e) => {
-    // prevent submit form when payment and delivery methods are not checked
-    if(!state.delivery.method) {
-      setErrors({ ...errors, deliveryErr: true });
-      e.preventDefault();
-    } else if(!state.payment) {
-      setErrors({ ...errors, paymentErr: true });
-      e.preventDefault();
-    } 
-    
-    handleState({ ...state, form: data });
-  };
-
+  const setProductQuantity = quantity => handleState({ ...state, product: { ...state.product, quantity } });
+  
   const setDelivery = (method, price) => {
     handleState({ ...state, delivery: { method, price }});
     // when user select delivery method, remove message error
@@ -54,10 +55,36 @@ function App() {
     setErrors({ ...errors, paymentErr: null });
   }
 
-  const formValidation = () => {
-    console.log('submit form');
-    
-  }
+  const setOrderAccepted = () => {
+    handleState({ ...state, orderAccept: !state.orderAccept });
+    setErrors({ ...errors, orderAcceptErr: null });
+  };
+
+  const onSubmit = (data, e) => {
+    // allow send form only when user accepts order
+    if(state.orderAccept) {
+      if(state.delivery.method === "DPD - pobranie" && state.payment !== "pobranie") {
+        handleMethodError({ paymentErr: true }, e);
+        return false;
+      }
+      // prevent submit form when payment and delivery methods are not checked
+      if(!state.delivery.method) {
+        handleMethodError({ deliveryErr: true }, e);
+        return false;
+      }
+  
+      if(!state.payment) {
+        handleMethodError({ paymentErr: true }, e);
+        return false;
+      } 
+      
+      handleState({ ...state, form: data, submitFormStatus: true });
+      console.log(data);
+    } else {
+      handleMethodError({ orderAcceptErr: true }, e);
+      return false;
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -74,11 +101,20 @@ function App() {
           />
           <Payment 
             handlePayment={setPayment} 
-            delivery={state.delivery} 
+            delivery={state.delivery.method} 
             error={errors.paymentErr}
           />
         </OrderMethods>
-        <Summary validate={formValidation} />
+        <Summary 
+          deliveryPrice={state.delivery.price}
+          productPrice={state.product.price}
+          setQuantity={setProductQuantity}
+          productQuantity={state.product.quantity}
+          orderAccept={state.orderAccept}
+          setOrderAccepted={setOrderAccepted}
+          orderAcceptError={errors.orderAcceptErr}
+          submitStatus={state.submitFormStatus}
+        />
       </Layout>
     </form>
   );

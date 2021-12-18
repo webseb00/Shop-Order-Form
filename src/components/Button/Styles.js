@@ -11,6 +11,20 @@ export const Wrapper = styled.button`
   cursor: pointer;
 
   ${(props) => {
+    if(props.disabled) {
+      return css`
+        opacity: .7;
+        cursor: none;
+        
+        &:hover {
+          background: #e54444 !important;
+          color: #ffffff !important;
+        }
+      `;
+    }
+  }}
+
+  ${(props) => {
     switch (props.mode) {
       case "primary-outlined":
         return css`

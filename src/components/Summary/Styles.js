@@ -39,6 +39,15 @@ export const Product = styled.div`
     margin-right: 5px;
   }
 
+  .product_input {
+    margin-left: 10px;
+    width: 50px;
+    padding: 6px;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    outline: none;
+  }
+
 `;
 
 export const OrderBottom = styled.div`

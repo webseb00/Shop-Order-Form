@@ -10,7 +10,7 @@ function Delivery({ handleDelivery, error }) {
   const handleRadio = e => {
     const arr = e.target.value.split('|');
 
-    handleDelivery(arr[0], arr[1]);
+    handleDelivery(arr[0].trim(), Number(arr[1]));
   };
 
   return (
