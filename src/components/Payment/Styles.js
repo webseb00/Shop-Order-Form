@@ -2,14 +2,10 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   grid-area: payment;
-
-  button {
-    margin-top: 2rem;
-  }
 `;
 
 export const BoxWrapper = styled.div`
-  margin: 0 .8rem;
+  margin: .8rem .8rem 2rem;
 `;
 
 export const Box = styled.div`

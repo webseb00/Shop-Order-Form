@@ -7,7 +7,8 @@ import { Button } from '../Button/Button';
 import { Wrapper, InfoPart, FormPart, InfoText, InputGroup } from './Styles.js';
 // import form elements
 import { CheckboxItem, InputField, SelectInput, InputTransition } from '../InputElements/InputElements';
-import { Modal } from '../Modal/Modal';
+// login modal window
+import { LoginModalWindow } from '../Modal/LoginModal';
 
 function ClientData({ form, register, errors }) {
   // show extra fields if user checks new account checkbox
@@ -17,17 +18,6 @@ function ClientData({ form, register, errors }) {
   const [modal, toggleModal] = useState(false);
   const openModal = () => toggleModal(true);
   const closeModal = () => toggleModal(false);
-  
-  const modalWindow = () => {
-    return (
-      <Modal
-        show={modal}
-        handleClose={closeModal}
-      >
-        {"Somme dummy content"}
-      </Modal>
-    )
-  }
   
   const countries = ['Polska', 'Francja', 'Niemcy', 'Anglia'];
 
@@ -44,7 +34,10 @@ function ClientData({ form, register, errors }) {
           handler={openModal}
         />
         {/* Modal login */}
-        {modalWindow()}
+        <LoginModalWindow 
+          modal={modal}
+          closeModal={closeModal}
+        />
         {/* --- Modal login --- */}
         <InfoText>Masz już konto? Kliknij żeby się zalogować</InfoText>
         <CheckboxItem 

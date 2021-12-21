@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Wrapper, BoxWrapper, Box } from './Styles.js'
 import { HeaderTitle } from '../HeaderTitle/HeaderTitle';
 import { BsCreditCard } from "react-icons/bs";
@@ -5,12 +6,14 @@ import { BsCreditCard } from "react-icons/bs";
 import { RadioItem } from '../InputElements/InputElements';
 import { Button } from '../Button/Button';
 import { Message } from '../Message/Message';
+import { DiscountModalWindow } from '../Modal/DiscountModal';
 
 function Payment({ handlePayment, delivery, error }) {
 
-  const handleButton = () => {
-    console.log('discount');
-  }
+  // handle login modal
+  const [modal, toggleModal] = useState(false);
+  const openModal = () => toggleModal(true);
+  const closeModal = () => toggleModal(false);
 
   const handleRadio = e => handlePayment(e.target.value);
 
@@ -81,8 +84,14 @@ function Payment({ handlePayment, delivery, error }) {
         mode="secondary-outlined"
         title="Dodaj kod rabatowy"
         fontSize={"1.6rem"}
-        handler={handleButton}
+        handler={openModal}
       />
+      {/* Modal discount */}
+      <DiscountModalWindow 
+        modal={modal}
+        closeModal={closeModal}
+      />
+      {/* --- Modal discount --- */}
     </Wrapper>
   )
 };

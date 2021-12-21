@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.button`
-  width: 100%;
-  padding: 1.5rem;
+  width: ${props => props.width || '100%'};
+  padding: ${props => props.padding || '1.5rem'};
   border-radius: .5rem;
   font-size: ${props => props.fontSize || `1.8rem`};
   font-weight: 500;
