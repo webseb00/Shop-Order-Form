@@ -6,7 +6,7 @@ import { Button } from '../Button/Button';
 // component individual styles
 import { Wrapper, InfoPart, FormPart, InfoText, InputGroup } from './Styles.js';
 // import form elements
-import { CheckboxItem, InputField, SelectInput, InputTransition } from '../InputElements/InputElements';
+import { CheckboxItem, InputField, SelectInput } from '../InputElements/InputElements';
 // login modal window
 import { LoginModalWindow } from '../Modal/LoginModal';
 
@@ -77,7 +77,7 @@ function ClientData({ form, register, errors }) {
           label="first_name"
           placeholder="Imię *"
           required={true}
-          refs={register("first_name", { required: true, maxLength: 22, pattern: /^[\wzżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/ })}
+          refs={register("first_name", { required: true, maxLength: 22, pattern: /^[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/ })}
           inputError={errors.first_name}
         />
         <InputField 
@@ -85,12 +85,13 @@ function ClientData({ form, register, errors }) {
           label="last_name"
           placeholder="Nazwisko *"
           required={true}
-          refs={register("last_name", { required: true, maxLength: 22, pattern: /^[\wzżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/ })}
+          refs={register("last_name", { required: true, maxLength: 22, pattern: /^[a-zA-ZzżźćńółęąśŻŹĆĄŚĘŁÓŃ]+$/ })}
           inputError={errors.last_name}
         />
         <SelectInput 
           label="countries"
           countries={countries}
+          refs={register("country", { required: true })}
         />
         <InputField 
           type="text"
@@ -106,7 +107,7 @@ function ClientData({ form, register, errors }) {
             label="zip_code"
             placeholder="Kod pocztowy *"
             required={true}
-            refs={register("zip_code", { required: true, pattern: { value: /^\d+\-\d+$/, message: "Format kodu: 00-000" } })}
+            refs={register("zip_code", { required: true, pattern: { value: /^\d+\-\d+$/, message: "Format kodu: 00-000" }})}
             inputError={errors.zip_code}
           />
           <InputField 

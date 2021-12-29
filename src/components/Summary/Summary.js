@@ -5,7 +5,7 @@ import { TextareaInput, CheckboxItem } from '../InputElements/InputElements';
 import { Button } from '../Button/Button';
 import { Message } from '../Message/Message';
 
-function Summary({ deliveryPrice, productPrice, setQuantity, productQuantity, orderAccept, setOrderAccepted, orderAcceptError, submitStatus }) {
+function Summary({ deliveryPrice, productPrice, setQuantity, productQuantity, orderAccept, setOrderAccepted, orderAcceptError, submitStatus, register, sendFormStatus }) {
   
   const showDeliveryPrice = () => {
     return (
@@ -64,6 +64,7 @@ function Summary({ deliveryPrice, productPrice, setQuantity, productQuantity, or
         <TextareaInput 
           name="order_comment"
           placeholder="Komentarz"
+          refs={register("order_comment")}
         />
         <CheckboxItem 
           label="Zapisz się, aby otrzymywać newsletter"
@@ -76,9 +77,9 @@ function Summary({ deliveryPrice, productPrice, setQuantity, productQuantity, or
         {orderAcceptError && <Message type="danger" text="Proszę zaakceptować regulamin zakupów!" />}
         <Button 
           type="submit"
-          title={!submitStatus ? "Potwierdź zamówienie" : "Zamówienie wysłane!"}
+          title={submitStatus}
           fontSize="1.55rem"
-          disabled={!submitStatus ? false : true}
+          disabled={sendFormStatus}
         />
       </CTAPart>
     </Wrapper>

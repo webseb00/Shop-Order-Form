@@ -43,19 +43,28 @@ export const InputField = ({ type, label, placeholder, required, refs, inputErro
   )
 }
 
-export const TextareaInput = ({ name, placeholder }) => {
+export const TextareaInput = ({ name, placeholder, refs }) => {
   return (
     <Textarea 
       name={name}
       placeholder={placeholder}
+      {...refs}
     />
   )
 }
 
-export const SelectInput = ({ label, countries }) => {
+export const SelectInput = ({ label, countries, refs }) => {
   return (
-    <Select name={label}>
-      {Array.from(countries).map((country, index) => <Option key={index} htmlFor={country.toLowerCase()}>{country}</Option>)};
+    <Select name={label} {...refs}>
+      {Array.from(countries).map((country, index) => 
+      <Option 
+        key={index} 
+        htmlFor={country.toLowerCase()}
+        value={country}
+        defaultValue={countries[1]}
+        >
+          {country}
+      </Option>)};
     </Select>
   )
 }

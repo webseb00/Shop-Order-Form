@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Import main component files
 import ClientData from './components/ClientData/ClientData';
 import Delivery from './components/Delivery/Delivery';
@@ -7,6 +7,7 @@ import Summary from './components/Summary/Summary';
 import { Layout, OrderMethods } from './components/Layout/Layout';
 // use react hook form library for handling form
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 function App() {
   // react hook form
@@ -25,7 +26,8 @@ function App() {
     payment: null,
     form: null,
     orderAccept: false,
-    submitFormStatus: false
+    submitFormStatus: 'Złóż zamówienie',
+    sendFormStatus: false
   });
 
   
@@ -79,12 +81,46 @@ function App() {
       } 
       
       handleState({ ...state, form: data, submitFormStatus: true });
-      console.log(data);
+
     } else {
       handleMethodError({ orderAcceptErr: true }, e);
       return false;
     }
   };
+
+  useEffect(() => {
+    if(state.form) {
+      sendOrderData();
+    }
+  }, [state.form])
+
+  const sendOrderData = async () => {
+    handleState({ ...state, submitFormStatus: 'Wysyłanie zamówienia...' });
+    
+    const order = {
+      client: state.form,
+      delivery: state.delivery,
+      method: state.payment
+    }
+
+    try {
+      const response = await axios({
+        method: 'post',
+        url: `http://localhost/shop-order-form/`,
+        headers: { 'content-type': 'application/json' },
+        data: order
+      });
+
+      if(response.data.success) {
+        // delay sending order only for demonstration purposes!
+        setTimeout(() => {
+          handleState({ ...state, submitFormStatus: 'Zamówienie wysłane!', sendFormStatus: true })
+        }, 3000);
+      }
+    } catch(error) {
+      console.error(error);
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -114,6 +150,8 @@ function App() {
           setOrderAccepted={setOrderAccepted}
           orderAcceptError={errors.orderAcceptErr}
           submitStatus={state.submitFormStatus}
+          register={register}
+          sendFormStatus={state.sendFormStatus}
         />
       </Layout>
     </form>

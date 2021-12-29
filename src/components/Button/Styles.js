@@ -15,11 +15,8 @@ export const Wrapper = styled.button`
       return css`
         opacity: .7;
         cursor: none;
-        
-        &:hover {
-          background: #e54444 !important;
-          color: #ffffff !important;
-        }
+        color: #e54444 !important;
+        background: #ffffff !important;
       `;
     }
   }}
