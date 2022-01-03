@@ -24,7 +24,7 @@ function Payment({ handlePayment, delivery, error }) {
         <Box>
           <RadioItem 
             name="payment_method"
-            value="payu"
+            value="PayU"
             label={
               <span><img src="../../img/payu-logo.png" alt="payU" />PayU</span>
             }
@@ -34,7 +34,7 @@ function Payment({ handlePayment, delivery, error }) {
         <Box>
           <RadioItem 
             name="payment_method"
-            value="pobranie"
+            value="Pobranie"
             label={
               <span><img src="../../img/wallet-2.png" alt="pobranie" />Płatność przy odbiorze</span>
             }
@@ -44,7 +44,7 @@ function Payment({ handlePayment, delivery, error }) {
         <Box>
           <RadioItem 
             name="payment_method"
-            value="przelew"
+            value="Przelew bankowy"
             label={
               <span><img src="../../img/druk.png" alt="payU" />Przelew bankowy - zwykły</span>
             }
@@ -58,7 +58,7 @@ function Payment({ handlePayment, delivery, error }) {
         <Box>
           <RadioItem 
             title="payment_method"
-            value="pobranie"
+            value="Pobranie"
             label={
               <span><img src="../../img/wallet-2.png" alt="pobranie" />Płatność przy odbiorze</span>
             }

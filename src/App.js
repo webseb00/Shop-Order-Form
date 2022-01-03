@@ -4,6 +4,7 @@ import ClientData from './components/ClientData/ClientData';
 import Delivery from './components/Delivery/Delivery';
 import Payment from './components/Payment/Payment';
 import Summary from './components/Summary/Summary';
+import { OrderSummaryModal } from './components/Modal/OrderSummaryModal';
 import { Layout, OrderMethods } from './components/Layout/Layout';
 // use react hook form library for handling form
 import { useForm } from "react-hook-form";
@@ -27,10 +28,10 @@ function App() {
     form: null,
     orderAccept: false,
     submitFormStatus: 'Złóż zamówienie',
-    sendFormStatus: false
+    sendFormStatus: false,
+    details: null
   });
 
-  
   // set errors for payment and delivery methods
   const [errors, setErrors] = useState({
     deliveryErr: null,
@@ -61,11 +62,11 @@ function App() {
     handleState({ ...state, orderAccept: !state.orderAccept });
     setErrors({ ...errors, orderAcceptErr: null });
   };
-
+  // firstly validate user data
   const onSubmit = (data, e) => {
     // allow send form only when user accepts order
     if(state.orderAccept) {
-      if(state.delivery.method === "DPD - pobranie" && state.payment !== "pobranie") {
+      if(state.delivery.method === "Kurier DPD - pobranie" && state.payment !== "Pobranie") {
         handleMethodError({ paymentErr: true }, e);
         return false;
       }
@@ -93,31 +94,45 @@ function App() {
       sendOrderData();
     }
   }, [state.form])
-
+  // send user data to server
   const sendOrderData = async () => {
     handleState({ ...state, submitFormStatus: 'Wysyłanie zamówienia...' });
     
     const order = {
       client: state.form,
       delivery: state.delivery,
-      method: state.payment
+      method: state.payment,
+      product: {
+        price: state.product.price,
+        quantity: state.product.quantity
+      }
     }
 
     try {
       const response = await axios({
         method: 'post',
-        url: `http://localhost/shop-order-form/`,
+        url: `http://localhost/shop-ssorder-form/`,
         headers: { 'content-type': 'application/json' },
         data: order
       });
 
-      if(response.data.success) {
+      const { success } = response.data.result;
+      const details = response.data.order;
+
+      if(success) {
         // delay sending order only for demonstration purposes!
         setTimeout(() => {
-          handleState({ ...state, submitFormStatus: 'Zamówienie wysłane!', sendFormStatus: true })
+          handleState({ 
+          ...state, 
+          submitFormStatus: 'Zamówienie wysłane!', 
+          sendFormStatus: true,
+          details
+        })
         }, 3000);
       }
     } catch(error) {
+      alert("Z powodu wystąpienia błędu nie jest możliwe złożenie zamówienia. Przepraszamy za utrudnienia.");
+      window.location.reload();
       console.error(error);
     }
   }
@@ -153,6 +168,11 @@ function App() {
           register={register}
           sendFormStatus={state.sendFormStatus}
         />
+        {state.sendFormStatus && 
+        <OrderSummaryModal 
+          modal={true} 
+          orderDetails={state.details} 
+        />}
       </Layout>
     </form>
   );

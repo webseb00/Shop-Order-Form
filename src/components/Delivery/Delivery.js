@@ -23,7 +23,7 @@ function Delivery({ handleDelivery, error }) {
         <Box>
           <RadioItem 
             name="delivery_method"
-            value="Paczkomat | 10.99"
+            value="Paczkomat Inpost | 10.99"
             label={
               <span><img src="../../img/inpost-logo.png" alt="paczkomat inpost" />Paczkomat 24/7</span>
             }
@@ -34,7 +34,7 @@ function Delivery({ handleDelivery, error }) {
         <Box>
           <RadioItem 
             name="delivery_method"
-            value="DPD | 18"
+            value="Kurier DPD | 18"
             label={
               <span><img src="../../img/dpd-logo.png" alt="dpd kurier" />Kurier DPD</span>
             }
@@ -45,7 +45,7 @@ function Delivery({ handleDelivery, error }) {
         <Box>
           <RadioItem 
             name="delivery_method"
-            value="DPD - pobranie | 22"
+            value="Kurier DPD - pobranie | 22"
             label={
               <span><img src="../../img/dpd-logo.png" alt="dpd pobranie" />Kurier DPD - pobranie</span>
             }
