@@ -3,8 +3,8 @@ import { IconSuccess } from './Styles';
 
 export const OrderSummaryModal = ({ modal, orderDetails}) => {
 
-  const { country, first_name, last_name, zip_code, street, city } = orderDetails?.customer;
-  const { order_number, delivery_method, payment_method, total_cost } = orderDetails?.details;
+  const { country, first_name, last_name, zip_code, street, city } = orderDetails.customer;
+  const { order_number, delivery_method, payment_method, total_cost } = orderDetails.details;
 
   return (
     <Modal

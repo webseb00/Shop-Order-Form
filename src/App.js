@@ -111,7 +111,7 @@ function App() {
     try {
       const response = await axios({
         method: 'post',
-        url: `http://localhost/shop-ssorder-form/`,
+        url: `http://localhost/shop-order-form/`,
         headers: { 'content-type': 'application/json' },
         data: order
       });
